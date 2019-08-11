@@ -200,7 +200,7 @@ Cancel by pressing typing `\\` followed by enter. You can also Ctrl-c twice, lik
 1. Statement separator `;`
 1. Example list generated from `test.ke`
 1. Parse negative numbers with higher presedence
-1. # takes array as first operand, takes multi-dimensionally
+1. \# takes array as first operand, takes multi-dimensionally
 1. Don't rlwrap with arguments to the CLI
 1. Print array inline if it is all numbers, not all ints/all floats
 1. Don't crash the REPL on errors
