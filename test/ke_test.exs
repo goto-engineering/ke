@@ -23,21 +23,32 @@ defmodule KeTest do
     assert interpret("1.1 2.4 3.5") == "1.1 2.4 3.5"
     assert interpret("1 2.3 4") == "1 2.3 4"
 
-    exp = String.trim("""
+    assert interpret(~s/1 "bob man" `two/) == """
     1
     "bob man"
     `two
-    """)
-    assert interpret(~s/1 "bob man" `two/) == exp
+    """
 
-    exp = String.trim("""
+    assert interpret(~s/(1;"bob man";`two)/) == """
     1
     "bob man"
     `two
-    """)
-    assert interpret(~s/(1;"bob man";`two)/) == exp
+    """
 
     assert interpret(~s/(1 1 2 2 3 3)/) == "1 1 2 2 3 3"
+  end
+
+  test "multi-dimensional arrays" do
+    assert interpret("(1 1;2 2)") == """
+    1 1
+    2 2
+    """
+
+    # assert interpret(~s/(1 1;"bob";`tree)/) == """
+    # 1 1
+    # "bob"
+    # `tree
+    # """
   end
 
   test "addition" do
@@ -229,7 +240,7 @@ defmodule KeTest do
     Error: Variable `a` is undefined
     Error: Variable `b` is undefined
     Error: Variable `c` is undefined
-    """ |> String.trim, %{}}
+    """, %{}}
     assert interpret_env("bad", %{data: "42"}) == {"Error: Variable `bad` is undefined", %{data: "42"}}
   end
 
