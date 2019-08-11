@@ -1,0 +1,15 @@
+/ Just a few examples
+!10
+1 - 2
+3 % 4
+1 1 1 + 2 2 2
+%5
+,10 / The preceding , means this is a list of a single item
+10 10,30 30
+"bob"
+*1 2 3
+-99
+=1 2 3 4 4 1
+="Bobby"
+10*1+!5
+"Bobby"^"oy"
