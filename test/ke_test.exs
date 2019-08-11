@@ -21,6 +21,8 @@ defmodule KeTest do
     assert interpret("1 2 3") == "1 2 3"
     assert interpret("10 20") == "10 20"
     assert interpret("1.1 2.4 3.5") == "1.1 2.4 3.5"
+    assert interpret("1 2.3 4") == "1 2.3 4"
+
     exp = String.trim("""
     1
     "bob man"
@@ -272,14 +274,7 @@ defmodule KeTest do
   end
 
   test "sort asc" do
-    exp = String.trim("""
-    1
-    2.5
-    3
-    4
-    """)
-    assert interpret("^3 2.5 1 4") == exp
-
+    assert interpret("^3 2.5 1 4") == "1 2.5 3 4"
     assert interpret(~s/^"Mississippi"/) == ~s/"Miiiippssss"/
   end
 
