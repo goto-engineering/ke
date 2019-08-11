@@ -278,6 +278,16 @@ defmodule KeTest do
     assert interpret(~s/^"Mississippi"/) == ~s/"Miiiippssss"/
   end
 
+  test "up" do
+    assert interpret("<3 1 83 94") == "1 0 2 3"
+    assert interpret(~s/<"Bob"/) == "0 2 1"
+  end
+
+  test "down" do
+    assert interpret(">3 1 83 94") == "3 2 0 1"
+    assert interpret(~s/>"Bob"/) == "1 2 0"
+  end
+
   test "running files" do
     assert capture_io(fn -> Ke.run_file("examples/test.ke") end) == """
     "Bob"
@@ -291,6 +301,7 @@ defmodule KeTest do
     # Wait, there is such a thing as right-atomic? Or is this just a special case?
     # assert interpret(~s/"abcdefgh"?"ac"/) == "0 2"
     # assert interpret(~s/1 2 3 4 5?1 5/) == "0 4"
+    # assert interpret_env(~s/^s=s@<s/, %{"s" => "Mississippi"}) == "true?"
 
     # Parse negative numbers before right-to-left
     # assert interpret("-1_1 2 3") == "1 2"

@@ -207,6 +207,7 @@ Cancel by pressing typing `\\` followed by enter. You can also Ctrl-c twice, lik
 1. How to `rlwrap` the escript binary? mix repl task?
 1. Don't crash the REPL on errors
 1. Dedicated example page to keep README clean?
+1. @ takes array of indices on right hand side
 
 The following is still missing:
 ```
@@ -218,8 +219,8 @@ Verb                       Adverb                Noun              Type
                            /: eachright sv|join  date 2019-06-28   `D .z.D
 &              where       \: eachleft  vs|split time 12:34:56.789 `t .z.t
                       
-<              up          I/O (0:h close)
->              down        0: read/write line    dict {a:2;b:`c}   `a
+                           I/O (0:h close)
+                           0: read/write line    dict {a:2;b:`c}   `a
                            1: read/write byte    tabl +{a:2 3 4}   `A
 ~  match                   2: read/write data    expr :32+9*f%5    `0
 !  key                     3: conn/set (.Z.[gs]) func {(+/x)%#x}   `1
