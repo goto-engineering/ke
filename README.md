@@ -217,7 +217,7 @@ Verb                       Adverb                Noun              Type
                            \  scan      n mod
                            ': eachprior peach          ø     π ∞
                            /: eachright sv|join  date 2019-06-28   `D .z.D
-&              where       \: eachleft  vs|split time 12:34:56.789 `t .z.t
+                           \: eachleft  vs|split time 12:34:56.789 `t .z.t
                       
                            I/O (0:h close)
                            0: read/write line    dict {a:2;b:`c}   `a

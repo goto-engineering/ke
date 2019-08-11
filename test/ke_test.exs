@@ -288,11 +288,8 @@ defmodule KeTest do
     assert interpret(~s/>"Bob"/) == "1 2 0"
   end
 
-  test "running files" do
-    assert capture_io(fn -> Ke.run_file("examples/test.ke") end) == """
-    "Bob"
-    "Hi, Bob!"
-    """
+  test "where" do
+    assert interpret("&1 0 2 1") == "0 2 2 3"
   end
 
   test "TODO" do
@@ -311,5 +308,12 @@ defmodule KeTest do
 
     # Semicolon, is this a parser issue?
     # assert interpret_env("a:2;a") == {"2", %{a: 2}}
+  end
+
+  test "running files" do
+    assert capture_io(fn -> Ke.run_file("examples/test.ke") end) == """
+    "Bob"
+    "Hi, Bob!"
+    """
   end
 end
