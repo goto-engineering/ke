@@ -207,7 +207,6 @@ Cancel by pressing typing `\\` followed by enter. You can also Ctrl-c twice, lik
 1. How to `rlwrap` the escript binary?
 1. Print array inline if it is all numbers, not all ints/all floats
 1. Don't crash the REPL on errors
-1. Make file runner maintain env
 1. Dedicated example page to keep README clean?
 
 The following is still missing:

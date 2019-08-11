@@ -30,8 +30,11 @@ defmodule Ke do
     content
     |> String.trim
     |> String.split("\n")
-    |> Enum.map(&interpret/1)
-    |> Enum.each(&IO.puts/1)
+    |> Enum.reduce(%{}, fn (line, env) ->
+      {reply, new_env} = interpret_env(line, env)
+      if reply, do: IO.puts(reply)
+      new_env
+    end)
   end
 
   defp read, do: IO.gets("  ") |> String.trim()

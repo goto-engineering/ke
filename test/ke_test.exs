@@ -1,6 +1,7 @@
 defmodule KeTest do
   import Ke
   use ExUnit.Case
+  import ExUnit.CaptureIO
   doctest Ke
 
   test "scalars" do
@@ -280,6 +281,13 @@ defmodule KeTest do
     assert interpret("^3 2.5 1 4") == exp
 
     assert interpret(~s/^"Mississippi"/) == ~s/"Miiiippssss"/
+  end
+
+  test "running files" do
+    assert capture_io(fn -> Ke.run_file("examples/test.ke") end) == """
+    "Bob"
+    "Hi, Bob!"
+    """
   end
 
   test "TODO" do
