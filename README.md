@@ -181,6 +181,9 @@ Install to `~/.mix/escripts`:
 If you've built the escript:
 `./ke`
 
+You can also directly run the `mix` task instead:
+`mix repl`
+
 Cancel by pressing typing `\\` followed by enter. You can also Ctrl-c twice, like any Erlang application.
 
 ## Run files
@@ -204,7 +207,6 @@ Cancel by pressing typing `\\` followed by enter. You can also Ctrl-c twice, lik
 1. How to `rlwrap` the escript binary?
 1. Print array inline if it is all numbers, not all ints/all floats
 1. Don't crash the REPL on errors
-1. Add `mix repl` task
 1. Make file runner maintain env
 1. Dedicated example page to keep README clean?
 
