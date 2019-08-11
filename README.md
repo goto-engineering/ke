@@ -10,6 +10,8 @@ Inspired by k7
 
 [+/∞](https://kcc.kparc.io) Learn k
 
+[+/kei](https://ref.kparc.io/) K reference
+
 ## Examples
 
 From `test.ke`:
