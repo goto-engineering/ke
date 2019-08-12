@@ -110,7 +110,17 @@ defmodule Ke.Evaluator do
     end
   end
 
-  def eval(expr, env \\ %{}) do
+  def eval(code, env \\ %{})
+
+  # Tree node expr
+  def eval({:code, expressions}, env) do
+    Enum.reduce(expressions, {[], env}, fn (expr, {_, new_env}) ->
+      eval(expr, new_env)
+    end)
+  end
+
+  # List expr
+  def eval(expr, env) do
     expr
     |> Enum.reverse() # ke is evaluated right to left
     |> eval([], env)
@@ -163,10 +173,18 @@ defmodule Ke.Evaluator do
   defp eval([a | _], [o, b], env) when o in @atomic_dyad and is_list(a) and is_list(b) do
     {{:error, "Array length doesn't match: #{length(a)}, #{length(b)}"}, env}
   end
-  defp eval([a | tail], [o, b], env) when o in @dyad, do: eval(tail, [Verbs.dy(o).(a, b)], env)
+  defp eval([a | tail], [o, b], env) when o in @dyad do
+    eval(tail, [Verbs.dy(o).(a, b)], env)
+  end
 
   # Vars
   defp eval([{:var, var}], _, env), do: {from_env(env, var), env}
+  defp eval([{:var, var} | tail], acc, env) do
+    case from_env(env, var) do
+      {:error, msg} -> {{:error, msg}, env}
+      v -> eval(tail, [v | acc], env)
+    end
+  end
 
   # Lists
   defp eval([], [l], env) when is_list(l) do
@@ -182,7 +200,9 @@ defmodule Ke.Evaluator do
   defp eval([], [x], env), do: {x, env}
 
   # Continue the expression, a scalar was added to the accumulator
-  defp eval([h | tail], acc, env), do: eval(tail, [h | acc], env)
+  defp eval([h | tail], acc, env) do
+    eval(tail, [h | acc], env)
+  end
 
   # For dev purposes
   defp eval([], acc, env), do: {"Missing: acc " <> inspect(acc), env}

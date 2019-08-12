@@ -30,6 +30,13 @@ defmodule Ke.Parser do
   end
   defp parse(input, acc, stack) do
     case input do
+      [";" | t] ->
+        prev_expr = [collapse_stack(stack) | acc] |> Enum.reverse
+        next_expr = parse(t, [], [])
+        case next_expr do
+          {:code, code} -> {:code, [prev_expr | code]}
+          expr -> {:code, [prev_expr | [expr]]}
+        end
       [" " | t] ->
         {value, tail} = decide_if_array(t, collapse_stack(stack))
         parse(tail, [value | acc], [])

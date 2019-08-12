@@ -1,5 +1,5 @@
-defmodule Ke.Debug do
-  defmacro deb(anything, label \\ nil) do
+defmodule D do
+  defmacro bug(anything, label \\ nil) do
     suggested_label = case anything do
       {var, _, _} when is_atom(var) -> var
       _ -> label

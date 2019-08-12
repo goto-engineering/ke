@@ -241,7 +241,8 @@ defmodule KeTest do
     assert interpret_env("unknown", %{}) == {"Error: Variable `unknown` is undefined", %{}}
     assert interpret_env("a+1", %{}) == {"Error: Variable `a` is undefined", %{}}
     assert interpret_env("1+a", %{}) == {"Error: Variable `a` is undefined", %{}}
-    assert interpret_env("a+b", %{}) == {"Error: Variable `a` is undefined", %{}}
+    assert interpret_env("a*b", %{"a" => 2, "b" => 3}) == {"6", %{"a" => 2, "b" => 3}}
+    assert interpret_env("a+b", %{}) == {"Error: Variable `b` is undefined", %{}}
     assert interpret_env("!n", %{}) == {"Error: Variable `n` is undefined", %{}}
     assert interpret_env("~a b c", %{}) == {"""
     Error: Variable `a` is undefined
@@ -325,6 +326,11 @@ defmodule KeTest do
     # """
   end
 
+  test "multiple expressions separated by ;" do
+    assert interpret_env("no:2;no") == {"2", %{"no" => 2}}
+    assert interpret_env("no:2;na:3;no*na") == {"6", %{"no" => 2, "na" => 3}}
+  end
+
   test "TODO" do
     # evaling undefined var in array doesn't error
 
@@ -338,9 +344,6 @@ defmodule KeTest do
     # assert interpret(~s/-1_""/) == ~s/"bo"/
     # assert interpret("-1#1 2 3 4") == ",4"
     # assert interpret(~s/-1#"bobby"/) == ~s/"y"/
-
-    # Semicolon, is this a parser issue?
-    # assert interpret_env("a:2;a") == {"2", %{a: 2}}
   end
 
   test "running files" do

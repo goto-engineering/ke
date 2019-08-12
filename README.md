@@ -199,7 +199,6 @@ Cancel by pressing typing `\\` followed by enter. You can also Ctrl-c twice, lik
 1. Order of presedence `()`
 1. Functions `{x+y}`
 1. nil vs nothing vs that zero k has?
-1. Statement separator `;`
 1. Example list generated from `examples.ke`
 1. Parse negative numbers with higher presedence
 1. \# takes array as first operand, takes multi-dimensionally
