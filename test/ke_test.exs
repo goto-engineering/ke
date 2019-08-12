@@ -44,18 +44,17 @@ defmodule KeTest do
     3 4
     """
 
-    # Prints correctly but token structure is messed up
-    # assert interpret("(1 2 3;4 5 6;7 8 9)") == """
-    # 1 2 3
-    # 4 5 6
-    # 7 8 9
-    # """
+    assert interpret("(1 2 3;4 5 6;7 8 9)") == """
+    1 2 3
+    4 5 6
+    7 8 9
+    """
 
-    # assert interpret(~s/(1 1;"bob";`tree)/) == """
-    # 1 1
-    # "bob"
-    # `tree
-    # """
+    assert interpret(~s/(1 1;"bob";`tree)/) == """
+    1 1
+    "bob"
+    `tree
+    """
   end
 
   test "addition" do
@@ -319,11 +318,11 @@ defmodule KeTest do
     2 4
     """
 
-    # assert interpret("+(1 2 3;4 5 6;7 8 9)") == """
-    # 1 4 7
-    # 2 5 8
-    # 3 6 9
-    # """
+    assert interpret("+(1 2 3;4 5 6;7 8 9)") == """
+    1 4 7
+    2 5 8
+    3 6 9
+    """
   end
 
   test "multiple expressions separated by ;" do
@@ -333,6 +332,7 @@ defmodule KeTest do
 
   test "TODO" do
     # evaling undefined var in array doesn't error
+    # assert interpret_env("1 a 2 + 3") == {}
 
     # Wait, there is such a thing as right-atomic? Or is this just a special case?
     # assert interpret(~s/"abcdefgh"?"ac"/) == "0 2"

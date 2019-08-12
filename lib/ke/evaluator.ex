@@ -110,7 +110,9 @@ defmodule Ke.Evaluator do
     end
   end
 
-  def eval(code, env \\ %{})
+  def eval(code) do
+    eval(code, %{})
+  end
 
   # Tree node expr
   def eval({:code, expressions}, env) do
@@ -120,16 +122,20 @@ defmodule Ke.Evaluator do
   end
 
   # List expr
-  def eval(expr, env) do
+  def eval(expr, env) when is_list(expr) do
     expr
     |> Enum.reverse() # ke is evaluated right to left
     |> eval([], env)
   end
+  def eval(expr, env) do
+    eval(expr, [], env)
+  end
 
-  defp eval([{:cmd, "\\\\"}], _, env), do: {{:cmd, :exit}, env}
-  defp eval([{:cmd, "\\intro"}], _, env), do: {{:intro, @intro_text}, env}
-  defp eval([{:cmd, "\\h"}], _, env), do: {{:help, @help_text}, env}
+  defp eval({:cmd, "\\\\"}, _, env), do: {{:cmd, :exit}, env}
+  defp eval({:cmd, "\\intro"}, _, env), do: {{:intro, @intro_text}, env}
+  defp eval({:cmd, "\\h"}, _, env), do: {{:help, @help_text}, env}
 
+  # Do these even eval?! Removed during lexing now?
   # Comments
   defp eval([:/], _, env), do: {nil, env}
   defp eval([:/ | tail], _, env), do: eval(tail, [], env)
@@ -178,7 +184,7 @@ defmodule Ke.Evaluator do
   end
 
   # Vars
-  defp eval([{:var, var}], _, env), do: {from_env(env, var), env}
+  defp eval({:var, var}, _, env), do: {from_env(env, var), env}
   defp eval([{:var, var} | tail], acc, env) do
     case from_env(env, var) do
       {:error, msg} -> {{:error, msg}, env}
@@ -198,14 +204,16 @@ defmodule Ke.Evaluator do
   # Scalars
   defp eval([], [], env), do: {nil, env}
   defp eval([], [x], env), do: {x, env}
+  defp eval([], x, env), do: {x, env}
 
   # Continue the expression, a scalar was added to the accumulator
   defp eval([h | tail], acc, env) do
     eval(tail, [h | acc], env)
   end
 
-  # For dev purposes
-  defp eval([], acc, env), do: {"Missing: acc " <> inspect(acc), env}
+  defp eval(h, acc, env) do
+    eval([], [h | acc], env)
+  end
 
   defp from_env(env, var) do
     case env[var] do
