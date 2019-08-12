@@ -39,10 +39,17 @@ defmodule KeTest do
   end
 
   test "multi-dimensional arrays" do
-    assert interpret("(1 1;2 2)") == """
-    1 1
-    2 2
+    assert interpret("(1 2;3 4)") == """
+    1 2
+    3 4
     """
+
+    # Prints correctly but token structure is messed up
+    # assert interpret("(1 2 3;4 5 6;7 8 9)") == """
+    # 1 2 3
+    # 4 5 6
+    # 7 8 9
+    # """
 
     # assert interpret(~s/(1 1;"bob";`tree)/) == """
     # 1 1
@@ -301,6 +308,21 @@ defmodule KeTest do
 
   test "where" do
     assert interpret("&1 0 2 1") == "0 2 2 3"
+  end
+
+  test "flip" do
+    assert interpret("+1 1") == "1 1"
+    assert interpret(~s/+"hi"/) == ~s/"hi"/
+    assert interpret("+(1 2;3 4)") == """
+    1 3
+    2 4
+    """
+
+    # assert interpret("+(1 2 3;4 5 6;7 8 9)") == """
+    # 1 4 7
+    # 2 5 8
+    # 3 6 9
+    # """
   end
 
   test "TODO" do

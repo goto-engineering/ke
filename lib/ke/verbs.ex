@@ -1,5 +1,4 @@
 defmodule Ke.Verbs do
-  import Ke.Debug
   def mo(:","), do: &enlist/1
   def mo(:!), do: &(0..(&1-1) |> Enum.to_list())
   def mo(:-), do: &(-&1)
@@ -68,12 +67,9 @@ defmodule Ke.Verbs do
   end
   def mo(:+), do: fn 
     l when is_list(l) ->
-    deb(l)
     if Enum.all?(l, &(is_list(&1))) do
       Enum.zip(l)
-      |> deb
       |> Enum.map(&Tuple.to_list/1)
-      |> deb
     else
       l
     end

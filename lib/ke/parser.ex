@@ -1,10 +1,8 @@
 defmodule Ke.Parser do
-  import Ke.Debug
   def parse(str) do
     str
     |> String.split("", trim: true)
     |> parse([], [])
-    |> deb("parsed")
   end
 
   @operators ~W"! + - * %  / & | # < > = ~ @ ^ : _ ? ,"

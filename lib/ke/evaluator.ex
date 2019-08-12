@@ -1,5 +1,4 @@
 defmodule Ke.Evaluator do
-  import Ke.Debug
   alias Ke.Verbs, as: Verbs
 
   @intro_text """
@@ -186,7 +185,7 @@ defmodule Ke.Evaluator do
   defp eval([h | tail], acc, env), do: eval(tail, [h | acc], env)
 
   # For dev purposes
-  defp eval([], acc, env), do: raise "Missing: acc " <> inspect(acc)
+  defp eval([], acc, env), do: {"Missing: acc " <> inspect(acc), env}
 
   defp from_env(env, var) do
     case env[var] do
