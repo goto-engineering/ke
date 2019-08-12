@@ -55,7 +55,7 @@ defmodule Ke.Evaluator do
   Verb                                             Noun              Type
      (dyadic)    (monadic)                         
   :  assign                                        char  " ab"       `c
-  +  add                                           name     `b       `n
+  +  add         flip                              name     `b       `n
   -  subtract    negate                            int     0 2       `i
   *  multiply    first                             float   2.3       `f
   %  divideby    inverse

@@ -197,7 +197,6 @@ Cancel by pressing typing `\\` followed by enter. You can also Ctrl-c twice, lik
 ## TODO
 
 1. Order of presedence `()`
-1. Nested arrays `(1 1;2 2)`
 1. Functions `{x+y}`
 1. nil vs nothing vs that zero k has?
 1. Statement separator `;`
@@ -213,7 +212,7 @@ The following is still missing:
 ```
 Verb                       Adverb                Noun              Type
                            '  each      n bar
-+              flip        /  over      n div          ``a
+                           /  over      n div          ``a
                            \  scan      n mod
                            ': eachprior peach          ø     π ∞
                            /: eachright sv|join  date 2019-06-28   `D .z.D
