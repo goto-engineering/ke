@@ -16,7 +16,7 @@ defmodule Ke.Lexer do
   defp lex(<<c::binary - size(1), _::binary>> = input, acc, stack) when c in @symbols do
     lex(input, [String.reverse(stack) | acc], "")
   end
-  defp lex("/" <> _, acc, stack), do: acc
+  defp lex("/" <> _, acc, _), do: acc
   defp lex(" " <> rest, acc, "") do
     lex(rest, acc, "")
   end
