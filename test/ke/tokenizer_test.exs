@@ -5,11 +5,12 @@ defmodule Ke.TokenizerTest do
   test "scalars" do
     assert parse([]) == nil
     assert parse(["2"]) == 2
+    assert parse(["-2"]) == -2
     assert parse(["2.5"]) == 2.5
   end
 
   test "arrays" do
-    assert parse(["11", "22", "33"]) == [11, 22, 33]
+    assert parse(["11", "-22", "33"]) == [11, -22, 33]
     assert parse(["1.1", "2.2", "3.3"]) == [1.1, 2.2, 3.3]
   end
 

@@ -1,16 +1,26 @@
 defmodule Ke.Tokenizer do
+  require D
   @operators ~W"! + - * %  / & | # < > = ~ @ ^ : _ ? ,"
 
   def parse([]), do: nil
-  def parse(t) when not is_list(t), do: scalarize(t)
+  # is this used at all?
+  def parse(t) when not is_list(t) do
+    D.bug(t, "single token")
+    # negative
+    scalarize(t)
+  end
   def parse(tokens) do
-    Enum.map(tokens, &scalarize/1)
+    tokens
+    |> negatives
+    |> D.bug("after negatives")
+    |> Enum.map(&scalarize/1)
     |> arrayify
     |> listify
     |> codify
   end
 
-  # Can all these passes use an abstraction? Lots of boilerplate
+  # Can all these passes use an abstraction? Half of this code is just implementing reduce.
+  # At least between single recursion calls?
 
   defp codify(tokens), do: codify(tokens, [], [])
   defp codify([], [], stack), do: c(stack)
@@ -83,6 +93,15 @@ defmodule Ke.Tokenizer do
   end
   defp c([i]), do: i
   defp c(s), do: Enum.reverse(s)
+
+
+  defp negatives(tokens), do: negatives(tokens, [])
+  defp negatives([], acc), do: Enum.reverse(acc)
+  defp negatives([h|t], acc) do
+    D.bug(h)
+    D.bug(acc)
+    negatives(t, [h|acc])
+  end
 
 
   @boundaries ~W"; ( )"

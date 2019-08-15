@@ -12,14 +12,18 @@ defmodule Ke.LexerTest do
     assert lex("+(1 12;33 3)") == ["+", "(", "1", "12", ";", "33", "3", ")"]
   end
 
-  test "arrays" do
-    assert lex("11 22 33") == ["11", "22", "33"]
-    assert lex("1.1 2.2 3.3") == ["1.1", "2.2", "3.3"]
-  end
-
   test "scalars" do
     assert lex("2") == ["2"]
+    assert lex("-2") == ["-2"]
     assert lex("2.5") == ["2.5"]
+  end
+
+  test "arrays" do
+    assert lex("11 - 22") == ["11", "-", "22"]
+    assert lex("11 -22") == ["11", "-22"]
+    assert lex("11-22") == ["11", "-", "22"]
+    assert lex("11 -22 33") == ["11", "-22", "33"]
+    assert lex("1.1 2.2 3.3") == ["1.1", "2.2", "3.3"]
   end
 
   test "strings" do

@@ -21,7 +21,7 @@ defmodule Ke.Evaluator do
     1 2 3,4 5 6
   1 2 3 4 5 6
 
-  ke is parsed right-to-left. There is no other order of presedence. This can
+  ke is parsed right-to-left. There is no other order of precedence. This can
   lead to confusion with math:
     10*1-2
   -10

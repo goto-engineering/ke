@@ -196,17 +196,18 @@ Cancel by pressing typing `\\` followed by enter. You can also Ctrl-c twice, lik
 
 ## TODO
 
-1. Order of presedence `()`
+1. Parse negative numbers with higher precedence
+1. Print nested lists correctly
+1. Move help and intro texts out of evaluator and into their own modules
+1. Order of precedence `()`
 1. Functions `{x+y}`
-1. nil vs nothing vs that zero k has?
+1. Each type has a null value, some have infinity values
 1. Example list generated from `examples.ke`
-1. Parse negative numbers with higher presedence
 1. \# takes array as first operand, takes multi-dimensionally
 1. How to `rlwrap` the escript binary? mix repl task?
 1. Don't crash the REPL on errors
 1. Dedicated example page to keep README clean?
 1. @ takes array of indices on right hand side
-1. Print nested lists correctly
 
 
 The following is still missing:
