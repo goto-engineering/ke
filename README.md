@@ -207,6 +207,8 @@ Cancel by pressing typing `\\` followed by enter. You can also Ctrl-c twice, lik
 1. Dedicated example page to keep README clean?
 1. @ takes array of indices on right hand side
 1. Print nested lists correctly
+1. Mix task to generate example markdown file from real code
+1. Mix task to diff output of `k` and `ke` binaries
 
 
 The following is still missing:
